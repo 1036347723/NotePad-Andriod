@@ -5,7 +5,8 @@ The Andriod Homework
 
 ## 1.时间戳功能
 ### 1.在noteslist_item.xml增加一个TextView按钮
->>><TextView
+'''
+<TextView
         android:id="@+id/text2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,3 +14,4 @@ The Andriod Homework
         android:singleLine="true"
         android:gravity="center_vertical"
         />
+        '''
