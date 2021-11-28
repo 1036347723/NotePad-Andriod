@@ -54,4 +54,4 @@ String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE, NotePad.Notes.COLUMN_N
 int[] viewIDs = { android.R.id.text1, R.id.text2 }//加入修改时间;
 ```
 ## 1.4 运行截图：
-[时间戳]（）
+[时间戳]（img/时间戳.png）
