@@ -55,3 +55,121 @@ int[] viewIDs = { android.R.id.text1, R.id.text2 }//加入修改时间;
 ```
 ## 1.4 运行截图：
 ![时间戳](/img/时间戳.png)
+
+
+
+
+# 2.搜索功能
+
+## 2.1在list_options_menu.xml中添加一个搜索的item
+
+```
+<!--添加一个搜索的按钮-->
+    <item
+        android:id="@+id/menu_search"
+        android:title="@string/menu_search"
+        android:icon="@android:drawable/ic_search_category_default"
+        android:showAsAction="always">
+    </item>
+```
+
+## 2.2在NoteList的onOptionsItemSelected方法中增加查找按钮的case语句:
+```
+case R.id.menu_search:
+//           查找按钮的事件
+            Intent intent = new Intent();
+            intent.setClass(NotesList.this,NoteSearch.class);
+            NotesList.this.startActivity(intent);;
+            return true;
+```
+
+
+## 2.3在layout中新建布局文件note_search_list.xml：
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="请输入要查询的内容..."
+        android:layout_alignParentTop="true">
+    </SearchView>
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+</LinearLayout>
+```
+
+## 2.4创建NoteSearch类
+```
+public class NoteSearch extends ListActivity  implements SearchView.OnQueryTextListener {
+    private static final String[] PROJECTION = new String[] {
+            NotePad.Notes._ID, // 0
+            NotePad.Notes.COLUMN_NAME_TITLE, // 1
+            NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, // 2
+      
+    };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.note_search_list);
+        Intent intent = getIntent();
+        if (intent.getData() == null) {
+            intent.setData(NotePad.Notes.CONTENT_URI);
+        }
+        SearchView searchview = (SearchView)findViewById(R.id.search_view);
+        searchview.setOnQueryTextListener(NoteSearch.this);  
+    }
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String selection = NotePad.Notes.COLUMN_NAME_TITLE + " Like ? ";
+        String[] selectionArgs = { "%"+newText+"%" };
+        Cursor cursor = managedQuery(
+                getIntent().getData(),         
+                PROJECTION,                      
+                selection,                      
+                selectionArgs,                    
+                NotePad.Notes.DEFAULT_SORT_ORDER 
+        );
+        String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE ,  NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE };
+        int[] viewIDs = { android.R.id.text1 , R.id.text2 };
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                this,
+                R.layout.noteslist_item,
+                cursor,
+                dataColumns,
+                viewIDs
+        );
+        setListAdapter(adapter);
+        return true;
+    }
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+
+        Uri uri = ContentUris.withAppendedId(getIntent().getData(), id);
+        String action = getIntent().getAction();
+        if (Intent.ACTION_PICK.equals(action) || Intent.ACTION_GET_CONTENT.equals(action)) {
+            setResult(RESULT_OK, new Intent().setData(uri));
+        } else {
+            startActivity(new Intent(Intent.ACTION_EDIT, uri));
+        }
+    }
+}
+```
+## 2.5最后在AndroidManifest.xml注册NoteSearch：
+```
+    <activity
+        android:name="NoteSearch"
+        android:label="search">
+    </activity>
+```
