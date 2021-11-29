@@ -516,7 +516,7 @@ public class NoteColor extends Activity {
         setListAdapter(adapter);
         return true;
  ```
- 截止到目前为止可以在界面中进行选择，但尚未实现排序。
+ 尚未排序成功
 
 
 
