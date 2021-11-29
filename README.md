@@ -1,7 +1,7 @@
 # NotePad-Andriod
 The Andriod Homework   
    
-这是一个记事本应用，已完成时间戳与查找笔记的两个基本功能
+这是一个记事本应用，已完成时间戳与查找笔记的两个基本功能，增加了更改笔记条的背景色以及给笔记排序的功能。其中给笔记排序的功能尚未完全完成。
 # 1.时间戳功能
 ## 1.1在noteslist_item.xml中增加TextView
 这个textview是为了显示时间戳
@@ -173,3 +173,7 @@ public class NoteSearch extends ListActivity  implements SearchView.OnQueryTextL
         android:label="search">
     </activity>
 ```
+
+# 3更改笔记条背景色的功能
+
+
