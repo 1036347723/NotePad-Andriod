@@ -458,7 +458,7 @@ public class NoteColor extends Activity {
 # 5.笔记排序
 
 ## 5.1在菜单文件list_options_menu.xml中添加排序的按钮：
-
+```
 <item
     android:id="@+id/menu_sort"
     android:title="@string/menu_sort"
@@ -476,11 +476,10 @@ public class NoteColor extends Activity {
             android:title="@string/menu_sort3"/>
         </menu>
     </item>
-
+```
 
 ## 5.2在NoteList的switch下添加case：
-
-//创建时间排序
+```
     case R.id.menu_sort1:
         cursor = managedQuery(
                 getIntent().getData(),            
@@ -498,26 +497,8 @@ public class NoteColor extends Activity {
         );
         setListAdapter(adapter);
         return true;
- //修改时间排序
-    case R.id.menu_sort2:
-        cursor = managedQuery(
-                getIntent().getData(),          
-                PROJECTION,                      
-                null,                            
-                null,                       
-                NotePad.Notes.DEFAULT_SORT_ORDER 
-        );
-        adapter = new MyCursorAdapter(
-                this,
-                R.layout.noteslist_item,
-                cursor,
-                dataColumns,
-                viewIDs
-        );
-        setListAdapter(adapter);
-        return true;
     //颜色排序
-    case R.id.menu_sort3:
+    case R.id.menu_sort2:
         cursor = managedQuery(
                 getIntent().getData(),
                 PROJECTION,      
@@ -534,6 +515,8 @@ public class NoteColor extends Activity {
                 );
         setListAdapter(adapter);
         return true;
+ ```
+ 截止到目前为止可以在界面中进行选择，但尚未实现排序。
 
 
 
