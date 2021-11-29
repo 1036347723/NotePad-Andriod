@@ -173,7 +173,9 @@ public class NoteSearch extends ListActivity  implements SearchView.OnQueryTextL
         android:label="search">
     </activity>
 ```
-
+## 2.6 运行截图
+![搜索功能展示](/img/搜索功能展示.png)
+![搜索功能展示2](/img/搜索功能展示2.png)
 
 # 3.更换笔记条的颜色
 ## 3.1在NotePad中添加颜色的字段并且声明颜色：
@@ -272,6 +274,10 @@ MyCursorAdapter adapter = new MyCursorAdapter(
     );
 ```
 至此，已经完成笔记条的颜色更换。
+
+## 3.4运行截图
+![笔记条背景色更改](/img/笔记条背景色更改.png)
+
 # 4.更换编辑时的背景颜色
 ## 4.1在PROJECTION中增加颜色字段：
 ```
@@ -454,6 +460,10 @@ public class NoteColor extends Activity {
     android:windowSoftInputMode="stateVisible"/>
 ```
 至此，完成在编辑笔记时可以调整颜色的功能。
+## 4.6运行截图
+![新建笔记时更换背景色](/img/新建笔记时更换背景色.png)
+![已有笔记更换背景色](/img/已有笔记更换背景色.png)
+
 
 # 5.笔记排序
 
@@ -516,6 +526,8 @@ public class NoteColor extends Activity {
         setListAdapter(adapter);
         return true;
  ```
+ ## 5.3 运行截图
+![排序功能按钮](/img/排序功能按钮.png)
  尚未排序成功
 
 
