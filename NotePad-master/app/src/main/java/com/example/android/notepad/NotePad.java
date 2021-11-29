@@ -28,6 +28,8 @@ import android.provider.BaseColumns;
 public final class NotePad {
     public static final String AUTHORITY = "com.google.provider.NotePad";
 
+
+
     // This class cannot be instantiated
     private NotePad() {
     }
@@ -36,6 +38,14 @@ public final class NotePad {
      * Notes table contract
      */
     public static final class Notes implements BaseColumns {
+
+        //添加颜色
+        public static final String COLUMN_NAME_BACK_COLOR = "color";
+        public static final int DEFAULT_COLOR = 0; //白
+        public static final int YELLOW_COLOR = 1; //黄
+        public static final int BLUE_COLOR = 2; //蓝
+        public static final int GREEN_COLOR = 3; //绿
+        public static final int RED_COLOR = 4; //红
 
         // This class cannot be instantiated
         private Notes() {}

@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- Copyright (C) 2007 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-<!--
- Declare the contents of this Android application.  The namespace
-     attribute brings in the Android platform namespace, and the package
-     supplies a unique name for the application.  When writing your
-     own application, the package name must be changed from "com.example.*"
-     to come from a domain that you own or have control over.
--->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication"
     android:versionCode="1"
@@ -31,10 +9,19 @@
         android:targetSdkVersion="28" />
 
     <application
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@drawable/app_notes"
         android:label="@string/app_name"
         android:testOnly="true" >
+
+        <!-- 换背景色 -->
+        <activity
+            android:name="com.example.android.notepad.NoteColor"
+            android:label="ChangeColor"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:windowSoftInputMode="stateVisible" />
+
         <provider
             android:name="com.example.android.notepad.NotePadProvider"
             android:authorities="com.google.provider.NotePad"
@@ -44,7 +31,8 @@
 
         <activity
             android:name="com.example.android.notepad.NotesList"
-            android:label="@string/title_notes_list" >
+            android:label="@string/title_notes_list"
+            android:theme="@android:style/Theme.Holo.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -151,8 +139,7 @@
         </activity>
         <activity
             android:name="com.example.android.notepad.NoteSearch"
-            android:label="@string/title_notes_search" >
-        </activity>
+            android:label="@string/title_notes_search" />
     </application>
 
 </manifest>
